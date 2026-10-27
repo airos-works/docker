@@ -27,7 +27,7 @@ for arch in "${ARCHES[@]}"; do
     out="build/haiku-$arch/docker"
     mkdir -p "$(dirname "$out")"
     echo ">> building haiku/$arch -> $out"
-    GOOS=haiku "GOARCH=$arch" CGO_ENABLED=0 GOFLAGS=-mod=vendor \
-        "$GO" build -trimpath -o "$out" ./cmd/docker
+    GOOS=haiku GOARCH="$arch" CGO_ENABLED=0 GOFLAGS=-mod=vendor \
+        "$GO" build -trimpath -ldflags="-s -w" -o "$out" ./cmd/docker
     ls -la "$out"
 done
