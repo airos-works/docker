@@ -45,6 +45,13 @@ port plus air/OS syscall extensions: `Tcgetattr`, `Tcsetattr`, `Ioctl`,
 - `vendor/github.com/sirupsen/logrus/terminal_check_haiku.go` — terminal
   detection through the new termios support.
 
+## Compose
+
+[airos-works/compose](https://github.com/airos-works/compose) ports the
+`docker compose` plugin; the CLI discovers it under
+`/boot/system/lib/docker/cli-plugins`, and the docker_compose package also
+installs `docker-compose` in `bin/`.
+
 ## Daemon
 
 The Engine (dockerd) is being ported separately in
