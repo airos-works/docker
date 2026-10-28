@@ -6,6 +6,25 @@
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/docker/cli/badge)](https://scorecard.dev/viewer/?uri=github.com/docker/cli)
 [![Codecov](https://img.shields.io/codecov/c/github/docker/cli?logo=codecov)](https://codecov.io/gh/docker/cli)
 
+<!-- airos-ci:latest-builds:start -->
+## Latest builds
+
+Built automatically by air/OS CI from commit `f996cd0` on 2026-10-28 ([all files](https://github.com/airos-works/docker/releases/tag/latest)).
+
+| Architecture | Package |
+|---|---|
+| arm64 | [containerd-2.4.2.git.188.a42ccebec-1-arm64.hpkg](https://github.com/airos-works/docker/releases/download/latest/containerd-2.4.2.git.188.a42ccebec-1-arm64.hpkg) |
+| arm64 | [docker_buildx-0.38.1.git.53.6d816fc3-1-arm64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_buildx-0.38.1.git.53.6d816fc3-1-arm64.hpkg) |
+| arm64 | [docker_cli-29.10.0-1-arm64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_cli-29.10.0-1-arm64.hpkg) |
+| arm64 | [docker_engine-28.5.2.git.5754.a897456b03-1-arm64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_engine-28.5.2.git.5754.a897456b03-1-arm64.hpkg) |
+| x86_64 | [containerd-2.4.2.git.188.a42ccebec-1-x86_64.hpkg](https://github.com/airos-works/docker/releases/download/latest/containerd-2.4.2.git.188.a42ccebec-1-x86_64.hpkg) |
+| x86_64 | [docker_buildx-0.38.1.git.53.6d816fc3-1-x86_64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_buildx-0.38.1.git.53.6d816fc3-1-x86_64.hpkg) |
+| x86_64 | [docker_cli-29.10.0-1-x86_64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_cli-29.10.0-1-x86_64.hpkg) |
+| x86_64 | [docker_engine-28.5.2.git.5754.a897456b03-1-x86_64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_engine-28.5.2.git.5754.a897456b03-1-x86_64.hpkg) |
+
+Install with `pkgman install <file>`, or copy the file into `/boot/system/packages`. Haiku SDK: x86_64 hrev60207-2103-g6a7d4fd5a3, arm64 hrev60207-2103-g6a7d4fd5a3.
+<!-- airos-ci:latest-builds:end -->
+
 ## About
 
 This repository is the home of the Docker CLI.
