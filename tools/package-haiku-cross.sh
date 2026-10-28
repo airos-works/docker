@@ -30,7 +30,7 @@ name docker_cli
 version $VERSION-1
 architecture $haiku_arch
 summary "Docker CLI for air/OS"
-description "The docker command-line client for air/OS, ported from Docker's open-source CLI. Talks to any Docker Engine over its unix socket or TCP; on air/OS the Engine listens on unix:///boot/system/cache/docker/docker.sock by default."
+description "The docker command-line client for air/OS, ported from Docker's open-source CLI. Talks to any Docker Engine over its unix socket or TCP; on air/OS the Engine listens on unix:///var/run/docker.sock by default."
 packager "air/OS contributors"
 vendor "air/OS"
 copyrights { "2026 air/OS contributors" "2013-2026 Docker, Inc." }
