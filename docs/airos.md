@@ -35,8 +35,8 @@ port plus air/OS syscall extensions: `Tcgetattr`, `Tcsetattr`, `Ioctl`,
   Extend this file as new symbols are needed.
 - `vendor/github.com/moby/moby/client/client_{unix,haiku}.go` — the
   default daemon socket on air/OS is
-  `unix:///boot/system/cache/docker/docker.sock` (air/OS has no
-  `/var/run`). The Engine port listens there; override with
+  `unix:///var/run/docker.sock` (on Haiku `/var` resolves to
+  `/boot/system/var`). The Engine port listens there; override with
   `DOCKER_HOST` as usual.
 - `vendor/github.com/moby/sys/user/lookup_unix.go` — Haiku parses
   `/etc/passwd` like other Unixes.
