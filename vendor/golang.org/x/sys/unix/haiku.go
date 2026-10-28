@@ -15,6 +15,7 @@ package unix
 
 import (
 	"syscall"
+	"time"
 	"unsafe"
 )
 
@@ -45,6 +46,8 @@ type Msghdr = syscall.Msghdr
 type Cmsghdr = syscall.Cmsghdr
 type Ucred = syscall.Ucred
 type ICMPv6Filter = syscall.ICMPv6Filter
+type Utsname = syscall.Utsname
+type Flock_t = syscall.Flock_t
 
 // Termios mirrors Haiku's struct termios; field order from
 // headers/posix/termios.h (encoded in the toolchain's ztypes_haiku_*.go).
@@ -415,3 +418,171 @@ func Minor(dev uint64) uint32 {
 func Mkdev(major, minor uint32) uint64 {
 	return (uint64(major) << 8) & 0xff00 | (uint64(minor) & 0xff) | ((uint64(minor) & 0xffffff00) << 16)
 }
+
+// ==== Additions for the Engine (moby) port ====
+
+// mmap and memory locking (Haiku libroot; Mlock family is ENOSYS there).
+func Mmap(fd int, offset int64, length int, prot int, flags int) ([]byte, error) {
+	return syscall.Mmap(fd, offset, length, prot, flags)
+}
+
+func Munmap(b []byte) error { return syscall.Munmap(b) }
+
+func Mprotect(b []byte, prot int) error { return syscall.Mprotect(b, prot) }
+
+func Madvise(b []byte, behav int) error { return syscall.Madvise(b, behav) }
+
+func Mlock(b []byte) error      { return syscall.Mlock(b) }
+func Munlock(b []byte) error    { return syscall.Munlock(b) }
+func Mlockall(flags int) error  { return syscall.Mlockall(flags) }
+func Munlockall() error         { return syscall.Munlockall() }
+
+const (
+	MAP_ANON      = syscall.MAP_ANON
+	MAP_ANONYMOUS = syscall.MAP_ANONYMOUS
+)
+
+// File descriptor duplication and flags.
+func Dup2(oldfd, newfd int) error { return syscall.Dup2(oldfd, newfd) }
+
+func Dup3(oldfd, newfd, flags int) error { return syscall.Dup3(oldfd, newfd, flags) }
+
+func CloseOnExec(fd int) {
+	Fcntl(fd, F_SETFD, FD_CLOEXEC)
+}
+
+func Fcntl(fd int, cmd int, arg int) (int, error) { return syscall.Fcntl(fd, cmd, arg) }
+
+// Socketpair creates a connected pair of sockets.
+func Socketpair(domain, typ, proto int) ([2]int, error) {
+	return syscall.Socketpair(domain, typ, proto)
+}
+
+// Stat and friends.
+func Lstat(path string, st *Stat_t) error { return syscall.Lstat(path, st) }
+func Stat(path string, st *Stat_t) error  { return syscall.Stat(path, st) }
+func Fstat(fd int, st *Stat_t) error      { return syscall.Fstat(fd, st) }
+
+// Flock applies or removes an advisory lock.
+func Flock(fd int, how int) error { return syscall.Flock(fd, how) }
+
+const (
+	LOCK_EX = syscall.LOCK_EX
+	LOCK_SH = syscall.LOCK_SH
+	LOCK_UN = syscall.LOCK_UN
+	LOCK_NB = syscall.LOCK_NB
+)
+
+// Mount flags, for packages that parse Linux-style option strings. Haiku
+// mounts through fs_info rather than mount(2); the moby/sys/mount haiku
+// backend reports these as unsupported at runtime.
+// Mount attaches a file system; Haiku has no userland mount(2), so report
+// ENOSYS until the Engine's mount backend exists.
+func Mount(source string, target string, fstype string, flags uintptr, data string) error {
+	return ENOSYS
+}
+
+// Unmount detaches a file system; Haiku has no POSIX unmount(2) exported
+// to userland, so report ENOSYS until the Engine's mount backend exists.
+func Unmount(target string, flags int) error { return ENOSYS }
+
+const (
+	MS_RDONLY       = 1
+	MS_NOSUID       = 2
+	MS_NODEV        = 4
+	MS_NOEXEC       = 8
+	MS_SYNCHRONOUS  = 16
+	MS_REMOUNT      = 32
+	MS_MANDLOCK     = 64
+	MS_DIRSYNC      = 128
+	MS_NOATIME      = 1024
+	MS_NODIRATIME   = 2048
+	MS_BIND         = 4096
+	MS_MOVE         = 8192
+	MS_REC          = 16384
+	MS_SILENT       = 32768
+	MS_POSIXACL     = 1 << 16
+	MS_UNBINDABLE   = 1 << 17
+	MS_PRIVATE      = 1 << 18
+	MS_SLAVE        = 1 << 19
+	MS_SHARED       = 1 << 20
+	MS_RELATIME     = 1 << 21
+	MS_KERNMOUNT    = 1 << 22
+	MS_I_VERSION    = 1 << 23
+	MS_STRICTATIME  = 1 << 24
+	MS_LAZYTIME     = 1 << 25
+	MS_ACTIVE       = 1 << 30
+	MS_NOUSER       = 1 << 31
+	MNT_DETACH      = 2
+	MNT_EXPIRE      = 4
+	MNT_FORCE       = 1
+	UMOUNT_NOFOLLOW = 8
+)
+
+// Uname returns system information (Haiku's struct utsname).
+func Uname(buf *Utsname) error { return syscall.Uname(buf) }
+
+// ByteSliceToString converts a NUL-terminated byte slice to a Go string.
+func ByteSliceToString(b []byte) string {
+	n := 0
+	for n < len(b) && b[n] != 0 {
+		n++
+	}
+	return string(b[:n])
+}
+
+const (
+	MADV_NORMAL     = syscall.MADV_NORMAL
+	MADV_RANDOM     = syscall.MADV_RANDOM
+	MADV_SEQUENTIAL = syscall.MADV_SEQUENTIAL
+	MADV_WILLNEED   = syscall.MADV_WILLNEED
+	MADV_DONTNEED   = syscall.MADV_DONTNEED
+	MADV_FREE       = syscall.MADV_FREE
+)
+
+// Statfs returns file system statistics; Haiku reports ENOSYS for the
+// POSIX statfs shape, which callers treat as "not a cgroup fs".
+func Statfs(path string, buf *Statfs_t) error { return syscall.Statfs(path, buf) }
+
+const CGROUP2_SUPER_MAGIC = 0x63677270
+
+// Access and process control additions.
+func Access(path string, mode uint32) error { return syscall.Access(path, mode) }
+
+func Kill(pid int, sig Signal) error { return syscall.Kill(pid, syscall.Signal(sig)) }
+
+const ESRCH = syscall.ESRCH
+
+// More errno and attribute symbols used by containerd and fsutil.
+const (
+	EBUSY    = syscall.EBUSY
+	ENODATA  = syscall.ENOTSUP
+)
+
+const XATTR_CREATE = 1
+
+// Lsetxattr sets an extended attribute; Haiku's BFS attributes are not
+// exposed through the POSIX xattr API in libroot, so report ENOSYS.
+func Lsetxattr(path string, attr string, data []byte, flags int) error {
+	return ENOSYS
+}
+
+// TimeToTimespec converts a time.Time to a Timespec (the fsutil copy
+// backend expects an error return for parity with newer x/sys releases).
+func TimeToTimespec(t time.Time) (Timespec, error) {
+	return Timespec{Sec: t.Unix(), Nsec: int64(t.Nanosecond())}, nil
+}
+
+// WaitStatus mirrors x/sys/unix's distinct wait-status type (it is not an
+// alias of syscall.WaitStatus upstream).
+type WaitStatus uint32
+
+func (w WaitStatus) Exited() bool          { return syscall.WaitStatus(w).Exited() }
+func (w WaitStatus) ExitStatus() int       { return syscall.WaitStatus(w).ExitStatus() }
+func (w WaitStatus) Signaled() bool        { return syscall.WaitStatus(w).Signaled() }
+func (w WaitStatus) Signal() Signal        { return Signal(syscall.WaitStatus(w).Signal()) }
+func (w WaitStatus) CoreDump() bool        { return syscall.WaitStatus(w).CoreDump() }
+func (w WaitStatus) Stopped() bool         { return syscall.WaitStatus(w).Stopped() }
+func (w WaitStatus) Continued() bool       { return syscall.WaitStatus(w).Continued() }
+func (w WaitStatus) StopSignal() Signal    { return Signal(syscall.WaitStatus(w).StopSignal()) }
+func (w WaitStatus) TrapCause() int        { return syscall.WaitStatus(w).TrapCause() }
