@@ -9,17 +9,17 @@
 <!-- airos-ci:latest-builds:start -->
 ## Latest builds
 
-Built automatically by air/OS CI from commit `61c1ab2` on 2026-10-30 ([all files](https://github.com/airos-works/docker/releases/tag/latest)).
+Built automatically by air/OS CI from commit `feadefd` on 2026-10-30 ([all files](https://github.com/airos-works/docker/releases/tag/latest)).
 
 | Architecture | Package |
 |---|---|
 | arm64 | [containerd-2.4.2.git.195.932b93ed1c-1-arm64.hpkg](https://github.com/airos-works/docker/releases/download/latest/containerd-2.4.2.git.195.932b93ed1c-1-arm64.hpkg) |
 | arm64 | [docker_buildx-0.38.1.git.53.6d816fc3-1-arm64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_buildx-0.38.1.git.53.6d816fc3-1-arm64.hpkg) |
-| arm64 | [docker_cli-29.10.0-1-arm64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_cli-29.10.0-1-arm64.hpkg) |
+| arm64 | [docker_cli-29.10.0-51-arm64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_cli-29.10.0-51-arm64.hpkg) |
 | arm64 | [docker_engine-28.5.2.git.5765.e042e2f1315-2-arm64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_engine-28.5.2.git.5765.e042e2f1315-2-arm64.hpkg) |
 | x86_64 | [containerd-2.4.2.git.195.932b93ed1c-1-x86_64.hpkg](https://github.com/airos-works/docker/releases/download/latest/containerd-2.4.2.git.195.932b93ed1c-1-x86_64.hpkg) |
 | x86_64 | [docker_buildx-0.38.1.git.53.6d816fc3-1-x86_64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_buildx-0.38.1.git.53.6d816fc3-1-x86_64.hpkg) |
-| x86_64 | [docker_cli-29.10.0-1-x86_64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_cli-29.10.0-1-x86_64.hpkg) |
+| x86_64 | [docker_cli-29.10.0-51-x86_64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_cli-29.10.0-51-x86_64.hpkg) |
 | x86_64 | [docker_engine-28.5.2.git.5765.e042e2f1315-2-x86_64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_engine-28.5.2.git.5765.e042e2f1315-2-x86_64.hpkg) |
 | x86_64 | [linuxvm-0.1.0.git.2.29d8326-1-x86_64.hpkg](https://github.com/airos-works/docker/releases/download/latest/linuxvm-0.1.0.git.2.29d8326-1-x86_64.hpkg) |
 
