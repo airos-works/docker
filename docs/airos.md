@@ -52,9 +52,19 @@ port plus air/OS syscall extensions: `Tcgetattr`, `Tcsetattr`, `Ioctl`,
 `/boot/system/lib/docker/cli-plugins`, and the docker_compose package also
 installs `docker-compose` in `bin/`.
 
+## Signals
+
+`moby/sys/signal` (vendored) has Haiku's signal table, so `docker kill -s`,
+`docker stop --signal` and `docker run`'s signal proxy know signals by name
+(Haiku numbers them differently from Linux: SIGUSR1 is 18; the Engine's
+haiku shim translates them for containers in the Linux VM).
+
 ## Daemon
 
-The Engine (dockerd) is being ported separately in
-[airos-works/moby](https://github.com/airos-works/moby). Until an
-air/OS daemon is installed, point the CLI at any Docker daemon with
-`DOCKER_HOST=tcp://...`.
+The Engine (dockerd) is ported in
+[airos-works/moby](https://github.com/airos-works/moby) (the docker_engine
+package). Containers from Haiku images run natively; containers from Linux
+images run in air/OS's Linux VM (the linuxvm package,
+[airos-works/linuxvm](https://github.com/airos-works/linuxvm)), with Linux's
+namespaces, cgroups and networks. To use another Docker daemon, point the CLI
+at it with `DOCKER_HOST=tcp://...`.
