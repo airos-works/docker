@@ -9,19 +9,19 @@
 <!-- airos-ci:latest-builds:start -->
 ## Latest builds
 
-Built automatically by air/OS CI from commit `9ededdf` on 2026-10-30 ([all files](https://github.com/airos-works/docker/releases/tag/latest)).
+Built automatically by air/OS CI from commit `61c1ab2` on 2026-10-30 ([all files](https://github.com/airos-works/docker/releases/tag/latest)).
 
 | Architecture | Package |
 |---|---|
-| arm64 | [containerd-2.4.2.git.194.d6c2a1800a-1-arm64.hpkg](https://github.com/airos-works/docker/releases/download/latest/containerd-2.4.2.git.194.d6c2a1800a-1-arm64.hpkg) |
+| arm64 | [containerd-2.4.2.git.195.932b93ed1c-1-arm64.hpkg](https://github.com/airos-works/docker/releases/download/latest/containerd-2.4.2.git.195.932b93ed1c-1-arm64.hpkg) |
 | arm64 | [docker_buildx-0.38.1.git.53.6d816fc3-1-arm64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_buildx-0.38.1.git.53.6d816fc3-1-arm64.hpkg) |
 | arm64 | [docker_cli-29.10.0-1-arm64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_cli-29.10.0-1-arm64.hpkg) |
-| arm64 | [docker_engine-28.5.2.git.5764.a6bc149e36-2-arm64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_engine-28.5.2.git.5764.a6bc149e36-2-arm64.hpkg) |
-| x86_64 | [containerd-2.4.2.git.194.d6c2a1800a-1-x86_64.hpkg](https://github.com/airos-works/docker/releases/download/latest/containerd-2.4.2.git.194.d6c2a1800a-1-x86_64.hpkg) |
+| arm64 | [docker_engine-28.5.2.git.5765.e042e2f1315-2-arm64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_engine-28.5.2.git.5765.e042e2f1315-2-arm64.hpkg) |
+| x86_64 | [containerd-2.4.2.git.195.932b93ed1c-1-x86_64.hpkg](https://github.com/airos-works/docker/releases/download/latest/containerd-2.4.2.git.195.932b93ed1c-1-x86_64.hpkg) |
 | x86_64 | [docker_buildx-0.38.1.git.53.6d816fc3-1-x86_64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_buildx-0.38.1.git.53.6d816fc3-1-x86_64.hpkg) |
 | x86_64 | [docker_cli-29.10.0-1-x86_64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_cli-29.10.0-1-x86_64.hpkg) |
-| x86_64 | [docker_engine-28.5.2.git.5764.a6bc149e36-2-x86_64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_engine-28.5.2.git.5764.a6bc149e36-2-x86_64.hpkg) |
-| x86_64 | [linuxvm-0.1.0.git.1.24da936-1-x86_64.hpkg](https://github.com/airos-works/docker/releases/download/latest/linuxvm-0.1.0.git.1.24da936-1-x86_64.hpkg) |
+| x86_64 | [docker_engine-28.5.2.git.5765.e042e2f1315-2-x86_64.hpkg](https://github.com/airos-works/docker/releases/download/latest/docker_engine-28.5.2.git.5765.e042e2f1315-2-x86_64.hpkg) |
+| x86_64 | [linuxvm-0.1.0.git.2.29d8326-1-x86_64.hpkg](https://github.com/airos-works/docker/releases/download/latest/linuxvm-0.1.0.git.2.29d8326-1-x86_64.hpkg) |
 
 Install with `pkgman install <file>`, or copy the file into `/boot/system/packages`. Haiku SDK: x86_64 hrev60207-2122-g35b1bdfeea, arm64 hrev60207-2122-g35b1bdfeea.
 <!-- airos-ci:latest-builds:end -->
